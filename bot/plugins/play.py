@@ -25,24 +25,24 @@ from bot import vcusr
 STREAM = {8}
 GROUP_CALLS = {}
     
-@vcusr.on_message(filters.command("help", "!"))
+@vcusr.on_message(filters.command("help", "."))
 async def help_vc(client, message):
     text = '''====== Help Menu ======
 **Play as Audio**
-- !play __(reply to audio / youtube url / search query)__
-- !radio __(radio stream url)__
+- .play __(reply to audio / youtube url / search query)__
+- .radio __(radio stream url)__
 
 **Play as Video**
-- !stream __(reply to video / youtube url / search query)__
-- !live __(youtube live stream url)__
+- .stream __(reply to video / youtube url / search query)__
+- .live __(youtube live stream url)__
 
 **Extra**
-- !endvc: Leave from vc
-- !video: Download url or search query in video format
-- !audio: Download url or search query in audio format'''
+- .endvc: Leave from vc
+- .video: Download url or search query in video format
+- .audio: Download url or search query in audio format'''
     await message.reply(text)
 
-@vcusr.on_message(filters.command("endvc", "!"))
+@vcusr.on_message(filters.command("endvc", "."))
 async def leave_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
@@ -51,7 +51,7 @@ async def leave_vc(client, message):
         await group_call.stop()
         await message.reply("__Left.__")
 
-@vcusr.on_message(filters.command("live", "!"))
+@vcusr.on_message(filters.command("live", "."))
 async def live_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
@@ -81,7 +81,7 @@ async def live_vc(client, message):
         await message.reply(str(e))
         return await group_call.stop()
 
-@vcusr.on_message(filters.command("radio", "!"))
+@vcusr.on_message(filters.command("radio", "."))
 async def radio_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
@@ -106,7 +106,7 @@ async def radio_vc(client, message):
         await message.reply(str(e))
         return await group_call.stop()
     
-@vcusr.on_message(filters.command("play", "!"))
+@vcusr.on_message(filters.command("play", "."))
 async def play_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
@@ -143,7 +143,7 @@ async def play_vc(client, message):
         await message.reply(str(e))
         return await group_call.stop()
 
-@vcusr.on_message(filters.command("stream", "!"))
+@vcusr.on_message(filters.command("stream", "."))
 async def stream_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
