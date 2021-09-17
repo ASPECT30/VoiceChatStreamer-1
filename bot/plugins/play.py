@@ -1,28 +1,10 @@
-'''
-VoiceChatStreamer, An Telegram Bot Project
-Copyright (c) 2021 Anjana Madu <https://github.com/AnjanaMadu>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>
-'''
-
 import os, asyncio, pafy
 from pyrogram import Client, filters
 from pytgcalls import GroupCallFactory
 from bot import video_link_getter, yt_video_search, match_url
 from bot import vcusr
 
-STREAM = {8}
+STREAM = {100}
 GROUP_CALLS = {}
     
 @vcusr.on_message(filters.command("help", "."))
@@ -42,7 +24,7 @@ async def help_vc(client, message):
 - .audio: Download url or search query in audio format'''
     await message.reply(text)
 
-@vcusr.on_message(filters.command("endvc", "$"))
+@vcusr.on_message(filters.command("endvc", "."))
 async def leave_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
@@ -51,7 +33,7 @@ async def leave_vc(client, message):
         await group_call.stop()
         await message.reply("__Left.__")
 
-@vcusr.on_message(filters.command("live", "$"))
+@vcusr.on_message(filters.command("live", "."))
 async def live_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
@@ -81,7 +63,7 @@ async def live_vc(client, message):
         await message.reply(str(e))
         return await group_call.stop()
 
-@vcusr.on_message(filters.command("radio", "$"))
+@vcusr.on_message(filters.command("radio", "."))
 async def radio_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
@@ -106,7 +88,7 @@ async def radio_vc(client, message):
         await message.reply(str(e))
         return await group_call.stop()
     
-@vcusr.on_message(filters.command("play", "$"))
+@vcusr.on_message(filters.command("play", "."))
 async def play_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
@@ -143,7 +125,7 @@ async def play_vc(client, message):
         await message.reply(str(e))
         return await group_call.stop()
 
-@vcusr.on_message(filters.command("stream", "$"))
+@vcusr.on_message(filters.command("stream", "."))
 async def stream_vc(client, message):
     CHAT_ID = message.chat.id
     if not str(CHAT_ID).startswith("-100"): return
